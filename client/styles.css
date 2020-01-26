@@ -1,0 +1,14 @@
+.title{
+    text-align: center;
+}
+.message-form,.loading, .limiter{
+    width: 50%;
+    margin: 0 auto;
+}
+.loading,.limiter{
+    text-align: center;
+}
+.posts{
+    width: 80%;
+    margin: 0 auto;
+}
