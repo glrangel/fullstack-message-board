@@ -3,6 +3,7 @@ const cors = require('cors');
 const monk = require('monk');
 const Filter = require('bad-words');
 const rateLimit = require('express-rate-limit');
+const dateFormat = require('dateformat');
 
 const app = express();
 // create a db called message board
@@ -17,7 +18,7 @@ app.use(express.json());
 // Get and display all posts from db
 app.get('/', (req,res) => {
     res.json({
-        message: 'Tester!'
+        message: 'This is my api for postmessage!'
     });
 });
 
@@ -28,15 +29,6 @@ app.get('/posts', (req,res) => {
         .then(posts => {
             res.json(posts);
         });
-
-    // res.json({
-    //     message: 'Tester3!'
-    // });
-});
-app.get('/test', (req,res) => {
-    res.json({
-        message: 'Tester 2!'
-    });
 });
 
 // ensure data being inserted is not empty
@@ -56,7 +48,7 @@ app.post('/posts', (req,res) =>{
         const post = {
             name: filter.clean(req.body.name.toString().trim()),
             content: filter.clean(req.body.content.toString().trim()),
-            created: new Date()
+            created: dateFormat(new Date(),"mmmm dS, yyyy, h:MM:ss TT")
         };
         // insert into db
         posts
@@ -68,7 +60,7 @@ app.post('/posts', (req,res) =>{
     } else {
         res.status(422);
         res.json({
-            message: 'Name and content are required!'
+            message: 'Name and message are required!'
         })
     }
 });

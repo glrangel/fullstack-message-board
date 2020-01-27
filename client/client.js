@@ -2,12 +2,9 @@ const form = document.querySelector('form');
 const loadingElement = document.querySelector('.loading');
 const postsElement = document.querySelector('.posts');
 const limiterElement = document.querySelector('.limiter');
-const API_URL = 'http://localhost:5000/posts';
-// console.log(window.location.hostname);
-// console.log(API_URL);
-// const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000/posts' : 'https://messageboard-api.now.sh/posts';
+const API_URL = window.location.hostname === '127.0.0.1' ? 'http://localhost:5000/posts' : 'https://postmessage-api.now.sh/posts';
 
-loadingElement.style.display = '';
+loadingElement.style.display = 'none';
 limiterElement.style.display = 'none';
 
 listAllPosts()
@@ -40,12 +37,14 @@ form.addEventListener('submit', (event)=> {
         console.log(createdPost);
         form.reset();
         limiterElement.style.display = '';
+        loadingElement.style.display = '';
         setTimeout(() =>{
             form.style.display = '';
             limiterElement.style.display = 'none';
+            loadingElement.style.display = 'none';
         }, 30000);
         listAllPosts();
-        loadingElement.style.display = 'none';
+        // loadingElement.style.display = 'none';
     })
 });
 
@@ -58,14 +57,17 @@ function listAllPosts(){
         posts.reverse();
         posts.forEach(post =>{
             const div = document.createElement('div');
+            div.className = "post";
             const header = document.createElement('h3');
             header.textContent = post.name;
 
             const contents = document.createElement('p');
             contents.textContent = post.content;
+            contents.className = "indent"
 
             const dateCreated = document.createElement('small');
             dateCreated.textContent = post.created;
+            dateCreated.className = "light-text"
 
             div.appendChild(header);
             div.appendChild(contents);
@@ -74,5 +76,4 @@ function listAllPosts(){
             postsElement.append(div);
         }) ; 
     });
-    loadingElement.style.display = 'none';
 }

@@ -1,14 +1,46 @@
+header{
+    margin: 50px 0;
+}
 .title{
     text-align: center;
 }
-.message-form,.loading, .limiter{
-    width: 50%;
-    margin: 0 auto;
+.message-form,.loading, .limiter,.posts{
+    width: 80%;
+    margin: 0px auto;
+}
+.message-form{
+    margin: 50px auto;
 }
 .loading,.limiter{
     text-align: center;
 }
-.posts{
-    width: 80%;
-    margin: 0 auto;
+.limiter{
+    height: 159px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.post{
+    margin: 20px 0;
+    padding-left: 10px;
+    background-color: whitesmoke;
+    box-shadow: 3px 3px 8px gray;
+    border-radius: 2px;
+
+}
+.light-text{
+    color: rgba(0,0,0,0.3);
+}
+.indent{
+    padding-left: 10px;
+}
+@media (min-width: 1600px){
+    .message-form,.loading, .limiter,.posts{
+        width: 35%;
+    }
+}
+@media (max-width: 1600px) and (min-width: 800px) {
+    .message-form,.loading, .limiter,.posts{
+        width: 50%;
+    }
 }
